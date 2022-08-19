@@ -5,7 +5,9 @@ function iniciar(){
     if(email === "" || contra === ""){
        alert ("Debe llenar todos los campos")
        }
-       else {location.href = "index.html";}
+       else {
+         localStorage.setItem('user', usuario);
+         location.href = "index.html";}
 
     }
 
