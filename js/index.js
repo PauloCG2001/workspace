@@ -12,3 +12,18 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 });
+
+document.addEventListener("DOMContentLoaded", function(){
+let usuario = localStorage.getItem("user");
+
+if (usuario == null){
+    alert ("Primero tenes que hacer login");
+    location.href = "login.html";
+}
+})
+
+document.getElementById("boton-cerrar-sesion").addEventListener("click", function()
+{
+    localStorage.removeItem("user");
+}
+)
