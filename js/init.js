@@ -40,3 +40,4 @@ let getJSONData = function(url){
         return result;
     });
 }
+document.getElementById("boton-cerrar-sesion").innerHTML = localStorage.getItem('user')
