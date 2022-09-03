@@ -209,3 +209,26 @@ img{
 #contra{
   width: 300px;
 }
+
+#ponerprecios{
+  width: 470px;
+display: inline-block;
+
+}
+  
+#filtros{
+ padding-left: 547px;
+
+}
+
+#boton-filtro{
+  width: 70px;
+  height: 40px;
+}
+
+#mover{
+  padding: 20px;
+  margin-left: 37px;
+}
+
+
