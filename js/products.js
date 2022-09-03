@@ -1,4 +1,5 @@
 
+
 let categoriesArray = [];
 
 function showCategoriesList(array){
@@ -14,7 +15,7 @@ function showCategoriesList(array){
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
                         <div class="mb-1">
-                        <h4>`+ product.name +`</h4> 
+                        <h4>`+ product.name + " - " + product.currency + " " + product.cost +`</h4> 
                         <p> `+ product.description +`</p> 
                         </div>
                         <small class="text-muted">` + product.soldCount + ` vendidos</small> 
@@ -28,9 +29,9 @@ function showCategoriesList(array){
     }
 }
 
-
+let numeroCategoria = localStorage.getItem("catID")
 document.addEventListener("DOMContentLoaded", function( ){
-    getJSONData(LIST_URL).then(function(resultObj){
+    getJSONData(PRODUCTS_URL + numeroCategoria + EXT_TYPE ).then(function(resultObj){
         if (resultObj.status === "ok")
         {
             categoriesArray = resultObj.data.products;
@@ -38,3 +39,44 @@ document.addEventListener("DOMContentLoaded", function( ){
         }
     });
 });
+
+function filtrar(array){
+    let desde = parseInt(document.getElementById("desde").value)
+    let hasta = parseInt(document.getElementById("hasta").value)
+
+    let listafiltrada= array.filter(product => product.cost >= desde && product.cost <= hasta)
+    showCategoriesList(listafiltrada)
+}
+
+let botonfiltro = document.getElementById("boton-filtro")
+
+botonfiltro.addEventListener("click", function(){
+    filtrar(categoriesArray);
+   
+ }) 
+
+ let botonasc = document.getElementById("boton-asc")
+ 
+ botonasc.addEventListener("click",function(){
+    categoriesArray.sort((men,may)=>men.cost-may.cost); 
+showCategoriesList(categoriesArray)
+ })
+
+ 
+ let botondesc = document.getElementById("boton-desc")
+ 
+ botondesc.addEventListener("click",function(){
+    categoriesArray.sort((men,may)=>may.cost-men.cost); 
+showCategoriesList(categoriesArray)
+ })
+
+ 
+ let botonrel = document.getElementById("boton-desc-rel")
+ 
+ botonrel.addEventListener("click",function(){
+    categoriesArray.sort((men,may)=>may.soldCount-men.soldCount); 
+showCategoriesList(categoriesArray)
+ })
+
+
+
