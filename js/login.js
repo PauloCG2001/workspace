@@ -6,7 +6,7 @@ function iniciar(){
        alert ("Debe llenar todos los campos")
        }
        else {
-         localStorage.setItem('user', usuario);
+         localStorage.setItem('user', email);
          location.href = "index.html";}
 
     }
@@ -14,5 +14,8 @@ function iniciar(){
     let boton = document.getElementById("boton");
 
     boton.addEventListener("click", function(){
-       iniciar()
+       iniciar();
+      
     })
+
+
