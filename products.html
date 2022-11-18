@@ -1,84 +1,94 @@
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
+let categoriesArray = [];
 
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-</head>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <main class="pb-5 container">
-    <div class="container">
-      <div class="text-center p-4">
-        <h2>Productos</h2>
-        <h4>Verás aqui todos los productos de la categoria Autos</h4>
-    </div>
-    <div id="filtros">
-      <div id="ponerprecios">
-        <div id="mover"><button class="btn btn-primary" id="boton-asc">Menor precio</button>
-        <button class="btn btn-primary" id="boton-desc">Mayor precio</button>
-        <button class="btn btn-primary" id="boton-desc-rel">Más relevantes</button>
-      </div>
-        
-      <form action="">
-        Desde<input id="desde" type="number">Hasta <input id="hasta" type="number"></form> 
-    </div> <button id="boton-filtro" type="button" class="btn btn-primary">Buscar</button>
-  </div>
-  <br>
-      <div id="lista-productos">
-      </div>
-    </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
-        2022</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-    </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/products.js"></script>
-</body>
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "products-info.html"
+}
 
-</html>
+
+function showCategoriesList(array){
+    let htmlContentToAppend = "";
+    for(let i = 0; i < array.length; i++){ 
+        let product = array[i];
+        htmlContentToAppend += `
+        <div class="list-group-item list-group-item-action">
+            <div class="row">
+                
+                <div class="col-3">
+                    <a onclick="setProdID(${product.id})" href="product-info.html"><img src="` + product.image + `" alt="product image" class="img-thumbnail">
+                </a>
+                </div>  
+                
+                <div class="col">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div class="mb-1">
+                        <h4>`+ product.name + " - " + product.currency + " " + product.cost +`</h4> 
+                        <p> `+ product.description +`</p> 
+                        </div>
+                        <small class="text-muted">` + product.soldCount + ` vendidos</small> 
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        `
+        document.getElementById("lista-productos").innerHTML = htmlContentToAppend;
+    }
+}
+
+let numeroCategoria = localStorage.getItem("catID")
+document.addEventListener("DOMContentLoaded", function( ){
+        getJSONData(PRODUCTS_URL + numeroCategoria + EXT_TYPE ).then(function(resultObj){
+            if (resultObj.status === "ok")
+            {
+                
+                categoriesArray = resultObj.data.products;
+                showCategoriesList(categoriesArray);
+                
+            }
+        });
+});
+
+
+
+function filtrar(array){
+    let desde = parseInt(document.getElementById("desde").value)
+    let hasta = parseInt(document.getElementById("hasta").value)
+
+    let listafiltrada= array.filter(product => product.cost >= desde && product.cost <= hasta)
+    showCategoriesList(listafiltrada)
+}
+
+let botonfiltro = document.getElementById("boton-filtro")
+
+botonfiltro.addEventListener("click", function(){
+    filtrar(categoriesArray);
+   
+ }) 
+
+ let botonasc = document.getElementById("boton-asc")
+ 
+ botonasc.addEventListener("click",function(){
+    categoriesArray.sort((men,may)=>men.cost-may.cost); 
+showCategoriesList(categoriesArray)
+ })
+
+ 
+ let botondesc = document.getElementById("boton-desc")
+ 
+ botondesc.addEventListener("click",function(){
+    categoriesArray.sort((men,may)=>may.cost-men.cost); 
+showCategoriesList(categoriesArray)
+ })
+
+ 
+ let botonrel = document.getElementById("boton-desc-rel")
+ 
+ botonrel.addEventListener("click",function(){
+    categoriesArray.sort((men,may)=>may.soldCount-men.soldCount); 
+showCategoriesList(categoriesArray)
+ })
+
+
