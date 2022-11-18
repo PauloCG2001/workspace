@@ -1,6 +1,12 @@
 
-
 let categoriesArray = [];
+
+
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "products-info.html"
+}
+
 
 function showCategoriesList(array){
     let htmlContentToAppend = "";
@@ -9,9 +15,12 @@ function showCategoriesList(array){
         htmlContentToAppend += `
         <div class="list-group-item list-group-item-action">
             <div class="row">
+                
                 <div class="col-3">
-                    <img src="` + product.image + `" alt="product image" class="img-thumbnail">
-                </div>
+                    <a onclick="setProdID(${product.id})" href="product-info.html"><img src="` + product.image + `" alt="product image" class="img-thumbnail">
+                </a>
+                </div>  
+                
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
                         <div class="mb-1">
@@ -31,14 +40,18 @@ function showCategoriesList(array){
 
 let numeroCategoria = localStorage.getItem("catID")
 document.addEventListener("DOMContentLoaded", function( ){
-    getJSONData(PRODUCTS_URL + numeroCategoria + EXT_TYPE ).then(function(resultObj){
-        if (resultObj.status === "ok")
-        {
-            categoriesArray = resultObj.data.products;
-            showCategoriesList(categoriesArray);
-        }
-    });
+        getJSONData(PRODUCTS_URL + numeroCategoria + EXT_TYPE ).then(function(resultObj){
+            if (resultObj.status === "ok")
+            {
+                
+                categoriesArray = resultObj.data.products;
+                showCategoriesList(categoriesArray);
+                
+            }
+        });
 });
+
+
 
 function filtrar(array){
     let desde = parseInt(document.getElementById("desde").value)
@@ -77,6 +90,5 @@ showCategoriesList(categoriesArray)
     categoriesArray.sort((men,may)=>may.soldCount-men.soldCount); 
 showCategoriesList(categoriesArray)
  })
-
 
 
