@@ -1,77 +1,116 @@
-(function () {
-    'use strict'
-  
-    
-    var forms = document.querySelectorAll('.needs-validation')
-  
-    
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-  
-          form.classList.add('was-validated')
-          
-        
-          
-          
-     
+<!DOCTYPE html>
+<html lang="es">
 
-
-        }, false)
-        
-      })
-
-      
-  })()
-
-
-
-document.addEventListener("DOMContentLoaded", function(){
-    document.getElementById("dropdownMenuButton1").innerHTML=sessionStorage.getItem("user");
-    document.getElementById("mailPerfil").value=sessionStorage.getItem("user");
-    document.getElementById("primerNombre").value=localStorage.getItem("primerNombre");
-    document.getElementById("segundoNombre").value=localStorage.getItem("segundoNombre");
-    document.getElementById("primerApellido").value=localStorage.getItem("primerApellido");
-    document.getElementById("segundoApellido").value=localStorage.getItem("segundoApellido");
-    document.getElementById("telefonoContacto").value=localStorage.getItem("telefonoContacto");
-
-})
-
-
-function validarPerfil(){
-    let primerNombre = document.getElementById("primerNombre").value;
-    let apellido = document.getElementById("primerApellido").value;
-    let mail = document.getElementById("mailPerfil").value;
-    let segundoNombre = document.getElementById("segundoNombre").value;
-    let segundoApellido = document.getElementById("segundoApellido").value;
-    let telefonoContacto = document.getElementById("telefonoContacto").value;
-    if(primerNombre == "" || apellido == "" || mail == "")
-    {
-showAlertError();
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
-    else{
-showAlertSuccess();
-localStorage.setItem("primerNombre", primerNombre)
-localStorage.setItem("primerApellido", apellido)
-localStorage.setItem("mailPerfil", mail)
-localStorage.setItem("segundoNombre", segundoNombre)
-localStorage.setItem("segundoApellido", segundoApellido)
-localStorage.setItem("telefonoContacto", telefonoContacto)
-    }
-}
-function showAlertSuccess() {
-    document.getElementById("alert-success").classList.add("show");
-   
-}
-function showAlertError() {
-    document.getElementById("alert-danger").classList.add("show");
-    
-}
 
-document.getElementById("btnCheckearDatos").addEventListener("click", function(){
-    validarPerfil();
-})
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+            <div class="dropdown">
+             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+             
+             </button>
+           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+             <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+             <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+             <li><a id="boton-cerrar-sesion" class="dropdown-item" href="login.html">Cerrar sesión</a></li>
+           </ul>
+         </div> 
+           </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="container">
+      <br>   
+      <div><h4>Perfil</h4></div>
+        <hr>
+        <form action="#" method="get" class="needs-validation" novalidate> <div>
+          <div class="flex margen" >
+             <div><label for="primerNombre" class="form-label">Primer nombre*</label> <br> <input id="primerNombre" class="form-control" type="text" required></div>  &nbsp&nbsp&nbsp&nbsp 
+             <div><label for="segundoNombre" class="form-label">Segundo nombre</label> <br> <input id="segundoNombre" class="form-control" type="text"></div>  &nbsp&nbsp&nbsp&nbsp
+          </div>
+
+          <div class="flex margen"> 
+            <div><label for="primerApellido" class="form-label">Primer apellido*</label> <br> <input id="primerApellido" class="form-control" type="text" required></div>  &nbsp&nbsp&nbsp&nbsp
+            <div><label for="segundoApellido" class="form-label">Segundo apellido</label> <br> <input id="segundoApellido" class="form-control" type="text"></div> &nbsp&nbsp&nbsp&nbsp
+          </div>
+
+          <div class="flex margen"> 
+            <div><label for="mailPerfil" class="form-label">E-mail*</label> <br> <input id="mailPerfil" class="form-control" type="text" required></div>&nbsp&nbsp&nbsp&nbsp
+            <div><label for="telefonoContacto" class="form-label">Telefono de contacto</label> <br> <input id="telefonoContacto" class="form-control"   type="number"></div>
+          </div>
+          
+        </div>
+
+        <br><br><br><br>
+                <hr>
+        <button type="submit" id="btnCheckearDatos" class="btn btn-primary margen"> Guardar Cambios</button>
+          
+        </form>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade" role="alert" id="alert-danger">
+      <p>Los datos ingresados no cumplen con los requisitos solicitados</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
+      <p>Datos guardados correctamente</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
+        2022</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/my-profile.js"></script>
+</body>
+
+</html>
