@@ -231,4 +231,149 @@ display: inline-block;
   margin-left: 37px;
 }
 
+#nombreprod{
+  margin: 40px;
+}
 
+.imgf{
+  float: right;
+  width: 279px;
+padding: 10px;
+border-color: black;
+border-style:groove;
+border-width: 1px;
+}
+
+.imgq{
+  width: 279px;
+  padding: 10px;
+  border-color: black;
+border-style:groove;
+border-width: 1px;
+}
+
+#cajitatexto{
+  width: max-content;
+}
+
+#cajaComentario{
+  border-top-style: groove ;
+}
+
+#adentro{
+    padding: 2px;
+
+}
+
+
+#comentarios{
+  border-right-style:groove ;
+  border-left-style:groove ;
+  border-bottom-style: groove;
+}
+
+.prodRel{
+  border-style:groove;
+  padding: 4px;
+  margin:10px;
+}
+
+.carousel-inner{
+ padding-left: 300px;
+  width: 800px;
+}
+
+#tituloCarrito{
+  text-align: center;
+}
+
+
+
+#tabladatosCarrito{
+  width: 100%;
+  text-align: center;
+}
+#tablaCarrito{
+  width: 100%;
+}
+
+#imgProductoCarrito{
+  width: 70px;
+}
+
+#precioinicial{
+  width: 45px;
+}
+
+.fila{
+  border-top: groove 2px;
+}
+
+
+
+.margin{
+  margin: 10px;
+}
+
+.agrandar{
+  width: 400px;
+}
+
+.esquina{
+  margin-left: 20px;
+}
+
+.float-der{
+  float: right;
+}
+
+.float-iz{
+  float: left;
+}
+
+.izquierda{
+  overflow: hidden;
+  width: 100%;
+}
+
+.border{
+  border-style: groove;
+  border-color: black;
+}
+
+.numero{
+  margin-left: 250px;
+}
+
+.marginsin-der{
+  margin-right: 20px;
+}
+
+.marginsin-iz{
+  margin-left: 12px;
+}
+
+.invalid-color{
+  color: #dc3545;
+}
+
+:hover.invalid-color{
+  color: #741d26;
+}
+
+.width{
+width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  text-align: center;
+  width: 100%;
+}
+
+.margen{
+  margin-left: 350px;
+}
