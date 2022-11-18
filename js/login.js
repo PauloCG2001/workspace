@@ -6,7 +6,7 @@ function iniciar(){
        alert ("Debe llenar todos los campos")
        }
        else {
-         localStorage.setItem('user', email);
+         sessionStorage.setItem('user', email);
          location.href = "index.html";}
 
     }
@@ -17,5 +17,4 @@ function iniciar(){
        iniciar();
       
     })
-
 
