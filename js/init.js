@@ -40,4 +40,12 @@ let getJSONData = function(url){
         return result;
     });
 }
-document.getElementById("boton-cerrar-sesion").innerHTML = localStorage.getItem('user')
+
+document.addEventListener("DOMContentLoaded", function(){
+  let usuario = sessionStorage.getItem("user");
+  
+  if (usuario == null){
+      alert ("Primero tenes que hacer login");
+      location.href = "login.html";
+  }
+  })
