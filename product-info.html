@@ -1,69 +1,116 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
-
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-          </li>
-        </ul>
-      </div>
+function mostrarlainfo(algo){
+    let htmlContentToAppend = "";
+        htmlContentToAppend += `<h4 id="nombreprod">${algo.name}</h4>
+        <hr>
+        <p><b>Precio</b></p>
+        ${algo.currency} ${algo.cost}
+        <br><br>
+        <p><b>Descripción</b></p>
+        ${algo.description}
+        <br><br>
+        <p><b>Categoria</b></p>
+        ${algo.category}
+        <br><br>
+        <p><b>Cantidad de vendidos</b></p>
+        ${algo.soldCount}
+        <br><br>
+        <p><b>Imagenes ilustrativas</b></p>
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+      <img src="${algo.images[0]}" class="d-block w-100" alt="...">
     </div>
-  </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+    <div class="carousel-item">
+      <img src="${algo.images[1]}" class="d-block w-100" alt="...">
     </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
-        2022</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-    </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div class="carousel-item">
+      <img src="${algo.images[2]}" class="d-block w-100" alt="...">
     </div>
   </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/product-info.js"></script>
-</body>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Previous</span>
+</button>
+<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Next</span>
+</button>   
+</div>
+       <br><br>
+       <h4>Comentarios</h4>
+       <div id="comentarios"></div>
+       <h4>Comentar</h4>
+       <h6>Tu opinion:</h6>
+       <textarea rows="5" cols="50" id="cajitatexto" type="text"></textarea><br><br>    
+       <h6>Tu puntuación:</h6>
+      <span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star "></span><span class="fa fa-star"></span><select><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+       <br><br><button class="btn btn-primary">Enviar</button>
+       <hr>
+       <h4>Productos Relacionados</h4>
+       <a href="#"><img id="img1" class="prodRel" src="${algo.relatedProducts[0].image}"></img></a><a href="#"><img id="img2" class="prodRel" src="${algo.relatedProducts[1].image}"></img></a>
+        `;
+document.getElementById("informacion").innerHTML = htmlContentToAppend;
 
-</html>
+document.getElementById("img1").addEventListener("click", function(){
+    localStorage.setItem("prodID", localStorage.getItem('idrel1'));
+    location.reload();
+            })
+document.getElementById("img2").addEventListener("click", function(){
+    localStorage.setItem("prodID", localStorage.getItem('idrel2'));
+    location.reload();
+                        })
+        
+
+}
+
+function ponerEstrellas(cantidad){
+    return '<span class="fa fa-star checked"></span>'.repeat(cantidad) + '<span class="fa fa-star"></span>'.repeat(5 - cantidad)   
+}
+
+function pintarEstrella(estrella){
+
+
+}
+
+function mostrarComentarios(array){
+    let comentarios = "";
+    for(let i = 0; i < array.length; i++){ 
+        let coment = array[i];
+    comentarios += `
+    <div id="cajaComentario">
+        <div id="adentro">
+    <b>${coment.user}</b> - ${coment.dateTime} - ${ponerEstrellas(coment.score)}
+    <br>
+    ${coment.description}<br>
+        <div>
+    <div>
+
+    `
+document.getElementById("comentarios").innerHTML = comentarios;}}
+
+
+let idCategoria = localStorage.getItem("prodID")
+document.addEventListener("DOMContentLoaded", function(){
+   
+   
+
+    getJSONData(PRODUCT_INFO_URL + idCategoria + EXT_TYPE).then(function(resultObj){
+        if (resultObj.status === "ok")
+        { 
+            mostrarlainfo(resultObj.data);
+            localStorage.setItem('idrel1', resultObj.data.relatedProducts[0].id);
+            localStorage.setItem('idrel2', resultObj.data.relatedProducts[1].id);
+
+        }
+    });
+
+    getJSONData(PRODUCT_INFO_COMMENTS_URL + idCategoria + EXT_TYPE).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            mostrarComentarios(resultObj.data);
+            
+        }})
+        
+    });
+
+ 
